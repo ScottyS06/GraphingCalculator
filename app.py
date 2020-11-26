@@ -18,9 +18,9 @@ def hello_world():
 
 def xvalueAdd():
     start = -10
-    for x in range(160):
+    for x in range(640):
         xVals.append(start)
-        start += .125
+        start += .03
 
 
 @app.route('/graph', methods=['POST'])
