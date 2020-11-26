@@ -16,6 +16,9 @@
         <input  type="number" name="y-intercept"/>
         <button type="submit">Graph</button>
     </form>
+
     <p>slope = {{slope}}, y_int = {{y_int}}</p>
+
+    <img src="{{url_for('static', filename='graph.png')}}" align="middle" />
 </body>
 </html>
