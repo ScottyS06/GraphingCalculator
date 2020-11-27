@@ -1,5 +1,14 @@
-body {
+* { margin:0; padding:0; box-sizing:border-box; }
+
+.header {
+background-color: #1c2b2d;
+color: white;
+padding: 5% 13%;
+}
+
+.body {
  width: 75%;
+ padding: 5% 13%;
  margin: auto;
 }
 

@@ -8,44 +8,48 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 <body>
-    <h1>Graphing Calculator</h1>
-    <form action="{{ url_for('graph') }}" method="post">
+    <div class="jumbotron header">
+        <h1>Graphinator</h1>
+        <h3>Enter a function see it graphed</h3>
+    </div>
+    <div class="body">
+        <form action="{{ url_for('graph') }}" method="post">
+            <label for="function">Choose a type of function:</label>
 
-        <label for="function">Choose a type of function:</label>
+            <select name="function" id="function" onchange="selectChange(this)">
+                <option value="error">Select a function</option>
+                <option value="linear">Linear</option>
+                <option value="quadratic">Quadratic</option>
+            </select>
 
-        <select name="function" id="function" onchange="selectChange(this)">
-            <option value="error">Select a function</option>
-            <option value="linear">Linear</option>
-            <option value="quadratic">Quadratic</option>
-        </select>
+            <div id="linear" style="display: none">
+                <label>m-value (slope)</label>
+                <input type="number" name="slope"/><br>
+                <label>b-value (y-intercept)</label>
+                <input  type="number" name="y-intercept"/><br>
+            </div>
 
-        <div id="linear" style="display: none">
-            <label>m-value (slope)</label>
-            <input type="number" name="slope"/>
-            <label>b-value (y-intercept)</label>
-            <input  type="number" name="y-intercept"/>
-        </div>
+            <div id="quadratic" style="display: none">
+                <label>a-value (x^2 coefficient)</label>
+                <input type="number" name="a"/><br>
+                <label>b-value (x coefficient)</label>
+                <input type="number" name="b"/><br>
+                <label>c-value (constant)</label>
+                <input type="number" name="c"/><br>
+            </div>
 
-        <div id="quadratic" style="display: none">
-            <label>a-value (x^2 coefficient)</label>
-            <input type="number" name="a"/>
-            <label>b-value (x coefficient)</label>
-            <input type="number" name="b"/>
-            <label>c-value (constant)</label>
-            <input type="number" name="c"/>
-        </div>
+            <button type="submit">Graph</button>
+        </form>
 
-        <button type="submit">Graph</button>
-    </form>
-
-    {% if error == "linear" %}
-    <p>slope = {{slope}}, y_int = {{y_int}}</p>
-    {% elif error == "quadratic" %}
-    <p>a = {{a}}, b = {{b}}, c= {{c}}</p>
-    {% else %}
-    <h3>No function was selected</h3>
-    {% endif %}
-    <img src="{{url_for('static', filename='graph.png')}}" align="middle" />
+        {% if error == "linear" %}
+        <p>slope = {{slope}}, y_int = {{y_int}}</p>
+        {% elif error == "quadratic" %}
+        <p>a = {{a}}, b = {{b}}, c= {{c}}</p>
+        {% else %}
+        <h3>No function was selected</h3>
+        {% endif %}
+        <img src="{{url_for('static', filename='graph.png')}}" align="middle" />
+    </div>
 
     <script>
         function selectChange(that) {
