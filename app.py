@@ -26,8 +26,22 @@ def xvalueAdd():
 @app.route('/graph', methods=['POST'])
 def graph():
     plt.clf()
-    slope = request.form['slope']
-    y_int = request.form['y-intercept']
+
+    function = request.form['function']
+    if function == "linear":
+        slope = request.form['slope']
+        y_int = request.form['y-intercept']
+        linear(slope, y_int)
+        return render_template('index.html', slope=slope, y_int=y_int, error=function)
+    elif function == "quadratic":
+        a = request.form['a']
+        b = request.form['b']
+        c = request.form['c']
+        return render_template('index.html', a=a, b=b, c=c, error=function)
+    return render_template('index.html', error=function)
+
+
+def linear(slope, y_int):
     xVals.clear()
     yVals.clear()
     xvalueAdd()
@@ -39,9 +53,7 @@ def graph():
     plt.autoscale(False)
     plt.xlim((-10, 10))
     plt.ylim((-30, 30))
-
     plt.savefig('static/graph.png')
-    return render_template('index.html', slope=slope, y_int=y_int)
 
 
 @app.after_request
