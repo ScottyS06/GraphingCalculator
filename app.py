@@ -26,7 +26,8 @@ def xvalueAdd():
 @app.route('/graph', methods=['POST'])
 def graph():
     plt.clf()
-
+    clearAll()
+    xvalueAdd()
     function = request.form['function']
     if function == "linear":
         slope = request.form['slope']
@@ -37,17 +38,33 @@ def graph():
         a = request.form['a']
         b = request.form['b']
         c = request.form['c']
+        quadratic(a, b, c)
         return render_template('index.html', a=a, b=b, c=c, error=function)
     return render_template('index.html', error=function)
 
 
-def linear(slope, y_int):
+def quadratic(a, b, c):
+    for value in xVals:
+        yValue = (value * value) * int(a)
+        yValue += value * int(b)
+        yValue += int(c)
+        yVals.append(yValue)
+    graphing()
+
+
+def clearAll():
     xVals.clear()
     yVals.clear()
-    xvalueAdd()
+
+
+def linear(slope, y_int):
     for value in xVals:
         yValue = value * int(slope)
         yVals.append(yValue + int(y_int))
+    graphing()
+
+
+def graphing():
     plt.scatter(xVals, yVals)
     plt.grid(True)
     plt.autoscale(False)
