@@ -10,15 +10,48 @@
 <body>
     <h1>Graphing Calculator</h1>
     <form action="{{ url_for('graph') }}" method="post">
-        <label>m-value (slope)</label>
-        <input  type="number" name="slope"/>
-        <label>b-value (y-intercept)</label>
-        <input  type="number" name="y-intercept"/>
+
+        <label for="function">Choose a type of function:</label>
+
+        <select name="function" id="function" onchange="selectChange(this)">
+            <option value="error">Select a function</option>
+            <option value="linear">Linear</option>
+            <option value="quadratic">Quadratic</option>
+        </select>
+
+        <div id="linear" style="display: none">
+            <label>m-value (slope)</label>
+            <input type="number" name="slope"/>
+            <label>b-value (y-intercept)</label>
+            <input  type="number" name="y-intercept"/>
+        </div>
+
+        <div id="quadratic" style="display: none">
+            <label>a-value (x^2 coefficient)</label>
+            <input type="number" name="a"/>
+            <label>b-value (x coefficient)</label>
+            <input type="number" name="b"/>
+            <label>c-value (constant)</label>
+            <input type="number" name="c"/>
+        </div>
+
         <button type="submit">Graph</button>
     </form>
 
     <p>slope = {{slope}}, y_int = {{y_int}}</p>
 
     <img src="{{url_for('static', filename='graph.png')}}" align="middle" />
+
+    <script>
+        function selectChange(that) {
+            if (that.value == "linear") {
+                document.getElementById("linear").style.display = "block";
+                document.getElementById("quadratic").style.display = "none";
+            } else if (that.value == "quadratic") {
+                document.getElementById("linear").style.display = "none";
+                document.getElementById("quadratic").style.display = "block";
+            }
+        }
+    </script>
 </body>
 </html>
