@@ -9,6 +9,9 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 xVals = []
 yVals = []
+minY = 0
+maxY = 0
+smartScale = "yes"
 
 
 @app.route('/')
@@ -29,8 +32,8 @@ def graph():
     clearAll()
     xvalueAdd()
     function = request.form['function']
-    smartscale = request.form['smartscale']
-    print(smartscale)
+    global smartScale
+    smartScale = request.form['smartscale']
     if function == "linear":
         slope = request.form['slope']
         y_int = request.form['y-intercept']
@@ -46,10 +49,18 @@ def graph():
 
 
 def quadratic(a, b, c):
+    global maxY
+    global minY
+    maxY = 0
+    minY = 0
     for value in xVals:
         yValue = (value * value) * int(a)
         yValue += value * int(b)
         yValue += int(c)
+        if yValue > maxY:
+            maxY = yValue
+        if yValue < minY:
+            minY = yValue
         yVals.append(yValue)
     graphing()
 
@@ -60,8 +71,16 @@ def clearAll():
 
 
 def linear(slope, y_int):
+    global maxY
+    global minY
+    maxY = 0
+    minY = 0
     for value in xVals:
         yValue = value * int(slope)
+        if yValue > maxY:
+            maxY = yValue
+        if yValue < minY:
+            minY = yValue
         yVals.append(yValue + int(y_int))
     graphing()
 
@@ -71,7 +90,12 @@ def graphing():
     plt.grid(True)
     plt.autoscale(False)
     plt.xlim((-10, 10))
-    plt.ylim((yVals[0]-10, yVals[-1]+10))
+    if smartScale == "yes":
+
+        plt.ylim(minY * 1.1, maxY * 1.1)
+    else:
+        plt.ylim(-30, 30)
+
     plt.savefig('static/graph.png')
 
 
