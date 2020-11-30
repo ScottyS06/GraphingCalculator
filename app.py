@@ -69,7 +69,7 @@ def graphing():
     plt.grid(True)
     plt.autoscale(False)
     plt.xlim((-10, 10))
-    plt.ylim((-30, 30))
+    plt.ylim((yVals[0]-10, yVals[-1]+10))
     plt.savefig('static/graph.png')
 
 
