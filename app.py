@@ -29,6 +29,8 @@ def graph():
     clearAll()
     xvalueAdd()
     function = request.form['function']
+    smartscale = request.form['smartscale']
+    print(smartscale)
     if function == "linear":
         slope = request.form['slope']
         y_int = request.form['y-intercept']
