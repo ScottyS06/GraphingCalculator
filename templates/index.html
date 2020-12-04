@@ -20,6 +20,7 @@
                 <option value="error">Select a function</option>
                 <option value="linear">Linear</option>
                 <option value="quadratic">Quadratic</option>
+                <option value="cubic">Cubic</option>
             </select>
 
             <div id="linear" style="display: none">
@@ -37,6 +38,18 @@
                 <label>c-value (constant)</label>
                 <input type="number" name="c"/><br>
             </div>
+
+            <div id="cubic" style="display: none">
+                <label>a-value (x^3 coefficient)</label>
+                <input type="number" name="ca"/><br>
+                <label>b-value (x^2 coefficient)</label>
+                <input type="number" name="cb"/><br>
+                <label>c-value (x coefficient)</label>
+                <input type="number" name="cc"/><br>
+                <label>d-value (constant)</label>
+                <input type="number" name="cd"/><br>
+            </div>
+
             <br>
             <label for="smartscale">Smart Scale</label>
             <div id="smartscale">
@@ -50,9 +63,9 @@
         </form>
 
         {% if error == "linear" %}
-        <p>slope = {{slope}}, y_int = {{y_int}}</p>
+        <p>y = {{slope}}x + {{y_int}}</p>
         {% elif error == "quadratic" %}
-        <p>a = {{a}}, b = {{b}}, c= {{c}}</p>
+        <p> y = {{a}}x<sup>2</sup>+ {{b}} x + {{c}}</p>
         {% else %}
         <h3>No function was selected</h3>
         {% endif %}
@@ -61,14 +74,20 @@
 
     <script>
         function selectChange(that) {
+            document.getElementById("linear").style.display = "none";
+            document.getElementById("quadratic").style.display = "none";
+            document.getElementById("cubic").style.display = "none";
             if (that.value == "linear") {
                 document.getElementById("linear").style.display = "block";
                 document.getElementById("quadratic").style.display = "none";
             } else if (that.value == "quadratic") {
                 document.getElementById("linear").style.display = "none";
                 document.getElementById("quadratic").style.display = "block";
+            } else if (that.value == "cubic") {
+                document.getElementById("cubic").style.display = "block";
             }
         }
     </script>
 </body>
 </html>
+

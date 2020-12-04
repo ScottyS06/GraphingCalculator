@@ -1,0 +1,31 @@
+What did you learn during this project?
+
+During this project, we learned how to build a web application using Python's Flask framework. Through the implementation of 
+the project, we learned to parse user input from an Html form using GET and POST requests and then perform computation and 
+display the desired output. In this project, we also gained knowledge of routing webpages and how to display certain elements 
+based on a user's selection and JavaScript DOM manipulation.
+
+What did you enjoy during this project?
+
+During this project, we enjoyed the challenges associated with graphing the function and providing elements for user input. We 
+had to deal with keeping our webpage relatively clean and easy to use for the client. We also had to come up with different 
+math related algorithms to keep track of a smart scale feature that we had in mind for our graphing application. Once our 
+project was completed, it was interesting to see the interactivity that Graphinator provided. 
+
+What did you find challenging or frustrating during this project?
+
+During this project, it was challenging to first figure out how we wanted to display the actual graph on our webpage. We 
+brainstormed different ideas of using frameworks that allowed us to draw lines and create animations but we finally settled on 
+using MatPlotLib to generate the graph. It was also challenging to figure out how we wanted to update the Html page once we 
+performed the computation and generated a result for the user. For this, we decided to utilize Flask which allowed us to render 
+a template after we initially parsed the user input through a POST request initiated by the Html form.
+
+What did you find particularly helpful for your learning during this project?
+
+Before we started the project we had to do some research on how similar graphing applications provide results based on user 
+input. We looked at websites like Desmos to gain inspiration for our own project. Additionally, it was important for us to watch some 
+tutorials on how to use Flask and perform GET and POST requests with the framework. We also found it helpful to split up the 
+project into frontend and backend aspects. This allowed us to keep a separation of concerns while developing the application. 
+If we arrived at problems during the development stage we could easily track the bugs to a specific location in our code. 
+Discussing before we started writing any code also helped us lay out a clear plan for our project. We were able to play on both 
+of our strengths and build an application that overall met our goals.
